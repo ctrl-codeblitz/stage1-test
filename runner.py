@@ -57,7 +57,7 @@ def run_test_logic(sub, infile, expfile, timeout):
         build_dir, run_cwd = Path(tmp), sub.parent
 
         if lang == "python":
-            command = [sys.executable, str(sub)]
+            command = [sys.executable, str(sub.resolve())]
         elif lang == "cpp":
             command_str, err = compile_cpp(sub, build_dir)
             if err: return "COMPILE_ERROR", err, 0
@@ -137,7 +137,7 @@ def main():
                 default_test = test_dir / "input1.txt"
                 test_cases = [default_test] if default_test.exists() else []
 
-            sol_pattern = f"**/solutions/**/solution{prob_num}/**/*"
+            sol_pattern = f"**/solutions/**/problem{prob_num}/**/*"
             potential_sols = [f for f in stage_dir.glob(sol_pattern) if f.suffix in ['.py', '.cpp', '.java'] and f.is_file()]
             sub = potential_sols[0] if potential_sols else None
 

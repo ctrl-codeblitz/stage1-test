@@ -1,7 +1,8 @@
 import sys
+import json
 
 def solve():
-    nums = list(map(int, sys.stdin.readline().split()))
+    nums = json.loads(sys.stdin.readline())
     
     squared_nums = [x * x for x in nums]
     squared_nums.sort()
